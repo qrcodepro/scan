@@ -2,7 +2,7 @@ Sure, here's a basic README template you can use for your GitHub repository:
 
 ---
 
-# QR Code Scanner Website
+# QR Code Scanner 
 
 ## Description
 This repository contains the code for a simple QR code scanner website. The website allows users to scan QR codes using their device's camera and perform actions based on the scanned content.
