@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Scanner</title>
+  <!-- Include Quagga.js library from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
+</head>
+<body>
+  <h1>QR Code Scanner</h1>
+  <div id="scanner-container"></div>
+
+  <script>
+    // Initialize Quagga.js
+    Quagga.init({
+      inputStream: {
+        name: "Live",
+        type: "LiveStream",
+        target: document.querySelector("#scanner-container")
+      },
+      decoder: {
+        readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader", "2of5_reader", "code_93_reader"]
+      }
+    }, function(err) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log("Initialization finished. Ready to start");
+      Quagga.start();
+    });
+
+    // Add listener for when a QR code is detected
+    Quagga.onDetected(function(result) {
+      console.log("Barcode detected and processed: ", result);
+      alert("QR Code scanned: " + result.codeResult.code);
+      Quagga.stop(); // Stop scanning after one successful scan
+    });
+  </script>
+</body>
+</html>
